@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# ⚡ Sudarshan's Portfolio
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+A high-performance personal portfolio website built with **Next.js 16** and **TypeScript**. 
+This project features a custom-built, serverless analytics system ("Silent Logger") that tracks visitor traffic in real-time without using heavy third-party cookies.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![Redis](https://img.shields.io/badge/Upstash-Redis-red?style=for-the-badge&logo=redis)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Modern UI:** Styled with Tailwind CSS for a responsive, dark-mode aesthetic.
+* **Silent Analytics:** A custom Middleware intercepts requests to log visitor details (IP, Location, Device) directly to Redis.
+* **Real-time Dashboard:** A hidden `/logs` route to view live visitor traffic.
+* **Type Safety:** Built entirely in TypeScript for robust code.
+* **Edge Performance:** Deployed on Vercel's Edge Network.
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+* **Framework:** [Next.js 16 (Turbopack)](https://nextjs.org/)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **Database:** [Upstash Redis](https://upstash.com/) (Serverless)
+* **Deployment:** [Vercel](https://vercel.com/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🕵️‍♂️ The "Silent Logger"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Instead of using Google Analytics, I built a custom tracking engine.
 
-## Deploy on Vercel
+1.  **Middleware:** Captures headers (`x-forwarded-for`, `x-vercel-ip-city`) on every request.
+2.  **Storage:** Pushes data to a Redis List (`lpush`).
+3.  **Viewer:** The `/logs` page fetches data from Redis and displays it in a terminal-style interface.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
