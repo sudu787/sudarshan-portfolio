@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/logs', '/admin'], // 🛑 Hide your secret spy dashboard from Google
+      disallow: ['/logs', '/admin'],
     },
     sitemap: 'https://sudarshanajoysindhu.vercel.app/sitemap.xml',
   }
