@@ -63,10 +63,10 @@ export default function Contact() {
             </p>
 
             <div className="flex gap-6 mb-12">
-              <a href="https://github.com" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
+              <a href="https://github.com/sudu787" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
                 <Github size={24} />
               </a>
-              <a href="https://linkedin.com" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
+              <a href="https://www.linkedin.com/in/sudarshan787/" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
                 <Linkedin size={24} />
               </a>
               <a href="mailto:sudarshanajoysindhu@gmail.com" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
