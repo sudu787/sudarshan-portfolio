@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, Send, CheckCircle, Terminal } from "lucide-reac
 import { useForm, ValidationError } from "@formspree/react";
 
 export default function Contact() {
-  // 1. SETUP: Replace the string below with your unique Formspree ID
+  // 1. SETUP: Your Formspree ID
   const [state, handleSubmit] = useForm("xpqaabbr");
 
   // 2. SUCCESS STATE: What to show after the user clicks send
@@ -63,13 +63,31 @@ export default function Contact() {
             </p>
 
             <div className="flex gap-6 mb-12">
-              <a href="https://github.com/sudu787" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
+              {/* GitHub Link */}
+              <a 
+                href="https://github.com/sudu787" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all"
+              >
                 <Github size={24} />
               </a>
-              <a href="https://www.linkedin.com/in/sudarshan787/" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
+
+              {/* LinkedIn Link (Fixed) */}
+              <a 
+                href="https://www.linkedin.com/in/sudarshan787/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all"
+              >
                 <Linkedin size={24} />
               </a>
-              <a href="mailto:sudarshanajoysindhu@gmail.com" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
+
+              {/* Email Link */}
+              <a 
+                href="mailto:sudarshanajoysindhu@gmail.com" 
+                className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all"
+              >
                 <Mail size={24} />
               </a>
             </div>
@@ -97,7 +115,7 @@ export default function Contact() {
                 <input 
                   id="name"
                   type="text" 
-                  name="name" // Name attribute is required for Formspree
+                  name="name" 
                   placeholder="John Doe" 
                   required
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
@@ -110,7 +128,7 @@ export default function Contact() {
                 <input 
                   id="email"
                   type="email" 
-                  name="email" // required
+                  name="email" 
                   placeholder="john@example.com" 
                   required
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
@@ -122,7 +140,7 @@ export default function Contact() {
                 <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">Message</label>
                 <textarea 
                   id="message"
-                  name="message" // required
+                  name="message" 
                   rows={4} 
                   placeholder="Your message..." 
                   required

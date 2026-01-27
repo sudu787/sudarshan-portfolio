@@ -7,13 +7,13 @@ const projects = [
     title: "Pentest Reporter",
     desc: "A full-stack security reporting platform designed to streamline penetration testing workflows. Features secure OAuth 2.0/OTP authentication, automated PDF generation, and a Dockerized microservices architecture using FastAPI and PostgreSQL.",
     tags: ["Python", "Next.js", "FastAPI", "Docker", "PostgreSQL"],
-    links: { github: "https://github.com/sudu787", live: null }, // Add specific link if you have it
+    links: { github: "https://github.com/sudu787/pentest-reporter-mvp", live: "https://pentest-frontend-7nnw.onrender.com/" }, // Add specific link if you have it
   },
   {
     title: "Phishing Detector Extension",
     desc: "Machine learning-powered security tool featuring a Chrome extension client and Flask backend. Uses a trained Random Forest model to extract URL-based features and classify potential phishing threats in real-time.",
     tags: ["Python", "Flask", "Scikit-Learn", "JavaScript"],
-    links: { github: "https://github.com/sudu787", live: null },
+    links: { github: "https://github.com/sudu787/mini-project/tree/add-ml-documentation", live: null },
   },
   {
     title: "Portfolio & Silent Logger",
