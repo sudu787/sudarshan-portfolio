@@ -4,10 +4,8 @@ import { Github, Linkedin, Mail, Send, CheckCircle, Terminal } from "lucide-reac
 import { useForm, ValidationError } from "@formspree/react";
 
 export default function Contact() {
-  // 1. SETUP: Your Formspree ID
   const [state, handleSubmit] = useForm("xpqaabbr");
 
-  // 2. SUCCESS STATE: What to show after the user clicks send
   if (state.succeeded) {
     return (
       <section id="contact" className="py-24 relative overflow-hidden flex items-center justify-center">
@@ -39,14 +37,12 @@ export default function Contact() {
     );
   }
 
-  // 3. NORMAL STATE: The form itself
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           
-          {/* Left Side: Text & Socials */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -63,7 +59,6 @@ export default function Contact() {
             </p>
 
             <div className="flex gap-6 mb-12">
-              {/* GitHub Link */}
               <a 
                 href="https://github.com/sudu787" 
                 target="_blank" 
@@ -73,7 +68,7 @@ export default function Contact() {
                 <Github size={24} />
               </a>
 
-              {/* LinkedIn Link (Fixed) */}
+              {/* 👇 THIS WAS THE FIX: Added https:// */}
               <a 
                 href="https://www.linkedin.com/in/sudarshan787/" 
                 target="_blank" 
@@ -83,7 +78,6 @@ export default function Contact() {
                 <Linkedin size={24} />
               </a>
 
-              {/* Email Link */}
               <a 
                 href="mailto:sudarshanajoysindhu@gmail.com" 
                 className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all"
@@ -100,7 +94,6 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Right Side: Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -108,7 +101,6 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-[#0a0a0a] border border-white/5 p-8 rounded-2xl shadow-2xl relative"
           >
-            {/* Form Logic */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">Name</label>
