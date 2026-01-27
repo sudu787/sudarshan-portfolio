@@ -70,7 +70,7 @@ export default function Contact() {
 
               {/* 👇 THIS WAS THE FIX: Added https:// */}
               <a 
-                href="https://www.linkedin.com/in/sudarshan787/" 
+                href="https://www.linkedin.com/in/sudarshan787" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all"
