@@ -10,10 +10,10 @@ const projects = [
     links: { github: "https://github.com/yourusername", live: null },
   },
   {
-    title: "IoT Honeypot System",
-    desc: "Low-interaction honeypot emulating vulnerable smart devices using MQTT. Captures malicious interaction patterns, brute-force attempts, and logs botnet activity for threat intelligence.",
-    tags: ["Python", "MQTT", "Linux", "Network Forensics"],
-    links: { github: "https://github.com/yourusername", live: null },
+    title: "Pentest Reporter",
+    desc: "A full-stack security reporting platform designed to streamline the workflow of penetration testers, allowing users to create projects, upload scan results, and generate PDF reports. Engineered a secure authentication system featuring both Google OAuth 2.0 and a custom OTP-based email login flow using FastAPI and BackgroundTasks for asynchronous email delivery. Designed a robust database schema with SQLAlchemy and PostgreSQL to manage users, projects, scans, and vulnerabilities, enforcing strict foreign-key relationships. Deployed a containerized microservices architecture using Docker on Render.com, implementing CORS middleware.",
+    tags: ["Python", "Next.js", "FastAPI", "Docker", "PostgreSQL"],
+    links: { github: "https://github.com/sudu787/pentest-reporter-mvp", live: "#" },
   },
   // Added a placeholder for your future third project
   {

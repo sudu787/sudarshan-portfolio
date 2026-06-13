@@ -106,11 +106,11 @@ export default function Hero() {
           </a>
           
           <a
-            href="/resume.pdf"
-            download="Sudarshan_Sindhu_CV.pdf"
+            href="/resumeaiml.pdf"
+            download="Sudarshan_Sindhu_Resume.pdf"
             className="px-8 py-3 bg-primary text-black font-semibold rounded-md hover:bg-primary/90 transition-colors flex items-center gap-2 justify-center shadow-[0_0_20px_rgba(0,255,157,0.3)] hover:shadow-[0_0_30px_rgba(0,255,157,0.5)]"
           >
-             Download CV <Download size={18} />
+             Download Resume <Download size={18} />
           </a>
         </div>
       </motion.div>
