@@ -4,29 +4,30 @@ import { Github, ExternalLink, Lock } from "lucide-react";
 
 const projects = [
   {
-    title: "Pentest Reporter",
-    desc: "A full-stack security reporting platform designed to streamline penetration testing workflows. Features secure OAuth 2.0/OTP authentication, automated PDF generation, and a Dockerized microservices architecture using FastAPI and PostgreSQL.",
-    tags: ["Python", "Next.js", "FastAPI", "Docker", "PostgreSQL"],
-    links: { github: "https://github.com/sudu787/pentest-reporter-mvp", live: "https://pentest-frontend-7nnw.onrender.com/" }, // Add specific link if you have it
+    title: "Phishing Detector Chrome Extension",
+    desc: "Developed a real-time cybersecurity browser extension powered by a custom-trained DistilBERT NLP model (fine-tuned on 1.33M URLs) and an XGBoost heuristic engine. Integrated an autonomous LLM (Llama-3.3 70B via Groq) to act as a virtual SOC Analyst, fusing live domain intelligence and ML signals to accurately detect and explain zero-day phishing attacks in milliseconds via a FastAPI backend.",
+    tags: ["Python", "Flask", "Scikit-Learn", "JavaScript", "Chrome API"],
+    links: { github: "https://github.com/yourusername", live: null },
   },
   {
-    title: "Phishing Detector Extension",
-    desc: "Machine learning-powered security tool featuring a Chrome extension client and Flask backend. Uses a trained Random Forest model to extract URL-based features and classify potential phishing threats in real-time.",
-    tags: ["Python", "Flask", "Scikit-Learn", "JavaScript"],
-    links: { github: "https://github.com/sudu787/mini-project/tree/add-ml-documentation", live: null },
+    title: "IoT Honeypot System",
+    desc: "Low-interaction honeypot emulating vulnerable smart devices using MQTT. Captures malicious interaction patterns, brute-force attempts, and logs botnet activity for threat intelligence.",
+    tags: ["Python", "MQTT", "Linux", "Network Forensics"],
+    links: { github: "https://github.com/yourusername", live: null },
   },
+  // Added a placeholder for your future third project
   {
-    title: "Portfolio & Silent Logger",
-    desc: "High-performance site built on the Vercel Edge Network. Features a custom serverless 'Silent Logger' engineered with Next.js Middleware and Redis to capture and visualize real-time visitor telemetry without third-party trackers.",
-    tags: ["Next.js 16", "TypeScript", "Redis", "Tailwind CSS"],
-    links: { github: "https://github.com/sudu787/sudarshan-portfolio", live: "https://sudarshanajoysindhu.vercel.app" },
+    title: "Home Lab & Network Defense",
+    desc: "Self-hosted intrusion detection and monitoring environment to practice Blue Team operations, log analysis, and network traffic inspection using industry-standard tools.",
+    tags: ["Wireshark", "Snort", "Virtualization", "Bash"],
+    links: { github: null, live: null },
   },
 ];
 
 export default function Projects() {
   return (
     <section id="projects" className="py-20">
-      <div className="max-w-6xl mx-auto px-4"> {/* Added px-4 for mobile padding */}
+      <div className="max-w-6xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -55,13 +56,8 @@ export default function Projects() {
                   </div>
                   <div className="flex gap-3">
                     {project.links.github && (
-                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                      <a href={project.links.github} className="text-gray-400 hover:text-white transition-colors">
                         <Github size={20} />
-                      </a>
-                    )}
-                    {project.links.live && (
-                      <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                        <ExternalLink size={20} />
                       </a>
                     )}
                   </div>

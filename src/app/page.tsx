@@ -3,7 +3,8 @@ import Hero from "@/components/sections/Hero";
 import Bio from "@/components/sections/Bio";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
-import Contact from "@/components/sections/Contact"; // <--- New Import
+import Terminal from "@/components/sections/Terminal";
+import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Bio />
         <Skills />
         <Projects />
+        <Terminal />
         
         {/* The new Contact section handles the footer content now */}
         <Contact />

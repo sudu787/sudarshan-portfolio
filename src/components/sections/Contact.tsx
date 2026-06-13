@@ -4,8 +4,10 @@ import { Github, Linkedin, Mail, Send, CheckCircle, Terminal } from "lucide-reac
 import { useForm, ValidationError } from "@formspree/react";
 
 export default function Contact() {
+  // 1. SETUP: Replace the string below with your unique Formspree ID
   const [state, handleSubmit] = useForm("xpqaabbr");
 
+  // 2. SUCCESS STATE: What to show after the user clicks send
   if (state.succeeded) {
     return (
       <section id="contact" className="py-24 relative overflow-hidden flex items-center justify-center">
@@ -37,12 +39,14 @@ export default function Contact() {
     );
   }
 
+  // 3. NORMAL STATE: The form itself
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           
+          {/* Left Side: Text & Socials */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -59,29 +63,13 @@ export default function Contact() {
             </p>
 
             <div className="flex gap-6 mb-12">
-              <a 
-                href="https://github.com/sudu787" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all"
-              >
+              <a href="https://github.com" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
                 <Github size={24} />
               </a>
-
-              {/* 👇 THIS WAS THE FIX: Added https:// */}
-              <a 
-                href="https://www.linkedin.com/in/sudarshan787" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all"
-              >
+              <a href="https://linkedin.com" target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
                 <Linkedin size={24} />
               </a>
-
-              <a 
-                href="mailto:sudarshanajoysindhu@gmail.com" 
-                className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all"
-              >
+              <a href="mailto:sudarshanajoysindhu@gmail.com" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
                 <Mail size={24} />
               </a>
             </div>
@@ -94,6 +82,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
+          {/* Right Side: Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -101,13 +90,14 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-[#0a0a0a] border border-white/5 p-8 rounded-2xl shadow-2xl relative"
           >
+            {/* Form Logic */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">Name</label>
                 <input 
                   id="name"
                   type="text" 
-                  name="name" 
+                  name="name" // Name attribute is required for Formspree
                   placeholder="John Doe" 
                   required
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
@@ -120,7 +110,7 @@ export default function Contact() {
                 <input 
                   id="email"
                   type="email" 
-                  name="email" 
+                  name="email" // required
                   placeholder="john@example.com" 
                   required
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
@@ -132,7 +122,7 @@ export default function Contact() {
                 <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">Message</label>
                 <textarea 
                   id="message"
-                  name="message" 
+                  name="message" // required
                   rows={4} 
                   placeholder="Your message..." 
                   required
@@ -160,4 +150,3 @@ export default function Contact() {
     </section>
   );
 }
-// forcing update v2

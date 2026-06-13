@@ -20,6 +20,7 @@ export default function Navbar() {
           <Link href="#about" className="hover:text-primary transition-colors">./About</Link>
           <Link href="#skills" className="hover:text-primary transition-colors">./Skills</Link>
           <Link href="#projects" className="hover:text-primary transition-colors">./Projects</Link>
+          <Link href="#terminal" className="hover:text-primary transition-colors">./Terminal</Link>
           <Link href="#contact" className="hover:text-primary transition-colors">./Contact</Link>
         </div>
 
@@ -27,7 +28,7 @@ export default function Navbar() {
             <a href="https://github.com/sudu787" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                 <Github size={20} />
             </a>
-            <a href="https://www.linkedin.com/in/sudarshan787" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+            <a href="www.linkedin.com/in/sudarshan787" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                 <Linkedin size={20} />
             </a>
         </div>
