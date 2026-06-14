@@ -211,7 +211,7 @@ export default function Terminal() {
         if (i === BOOT_LINES.length - 1) {
           setBooted(true);
           setIsBooting(false);
-          setTimeout(() => inputRef.current?.focus(), 100);
+          setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 100);
         }
       }, bl.delay);
       timeouts.push(t);

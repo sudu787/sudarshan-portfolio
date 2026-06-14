@@ -13,7 +13,7 @@ const projects = [
     title: "Pentest Reporter",
     desc: "A full-stack security reporting platform designed to streamline the workflow of penetration testers, allowing users to create projects, upload scan results, and generate PDF reports. Engineered a secure authentication system featuring both Google OAuth 2.0 and a custom OTP-based email login flow using FastAPI and BackgroundTasks for asynchronous email delivery. Designed a robust database schema with SQLAlchemy and PostgreSQL to manage users, projects, scans, and vulnerabilities, enforcing strict foreign-key relationships. Deployed a containerized microservices architecture using Docker on Render.com, implementing CORS middleware.",
     tags: ["Python", "Next.js", "FastAPI", "Docker", "PostgreSQL"],
-    links: { github: "https://github.com/sudu787/pentest-reporter-mvp", live: "#" },
+    links: { github: "https://github.com/sudu787/pentest-reporter-mvp", live: "https://pentest-frontend-production.up.railway.app/" },
   },
   // Added a placeholder for your future third project
   {
@@ -56,8 +56,13 @@ export default function Projects() {
                   </div>
                   <div className="flex gap-3">
                     {project.links.github && (
-                      <a href={project.links.github} className="text-gray-400 hover:text-white transition-colors">
+                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                         <Github size={20} />
+                      </a>
+                    )}
+                    {project.links.live && project.links.live !== "#" && (
+                      <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
+                        <ExternalLink size={20} />
                       </a>
                     )}
                   </div>

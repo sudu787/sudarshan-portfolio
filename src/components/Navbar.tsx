@@ -28,7 +28,7 @@ export default function Navbar() {
             <a href="https://github.com/sudu787" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                 <Github size={20} />
             </a>
-            <a href="www.linkedin.com/in/sudarshan787" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+            <a href="https://www.linkedin.com/in/sudarshan787" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Linkedin size={20} />
             </a>
         </div>
