@@ -1,32 +1,22 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-
-// 👇 1. Import the Analytics component
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const jetbrains = JetBrains_Mono({ 
-  subsets: ["latin"], 
-  variable: "--font-jetbrains-mono" 
-});
+const sans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-plex-sans" });
+const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-plex-mono" });
 
 export const metadata: Metadata = {
-  title: "Sudarshan Ajoy Sindhu | Red Team Specialist",
-  description: "Portfolio of a Cybersecurity Researcher and Penetration Tester.",
+  title: "Sudarshan Ajoy Sindhu",
+  description: "Security engineer and red teamer, IIIT Gwalior.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// The home page (/) is public/home.html; this layout serves /terminal and /logs.
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${jetbrains.variable} font-sans bg-background text-white antialiased selection:bg-primary selection:text-black`}>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+      <body className="bg-background text-white antialiased">
         {children}
-        
-        {/* 👇 2. Add the component here */}
         <Analytics />
       </body>
     </html>
