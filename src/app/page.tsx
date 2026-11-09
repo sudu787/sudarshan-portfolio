@@ -11,14 +11,11 @@ export default function Home() {
     <main className="relative min-h-screen">
       <Navbar />
       <Hero />
-      
-      <div className="container mx-auto px-4 space-y-24 pb-24">
+      <div className="mx-auto max-w-5xl px-4 pb-12">
         <Bio />
         <Skills />
         <Projects />
         <Terminal />
-        
-        {/* The new Contact section handles the footer content now */}
         <Contact />
       </div>
     </main>

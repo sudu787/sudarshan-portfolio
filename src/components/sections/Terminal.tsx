@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import SectionHeading from "@/components/SectionHeading";
 
 /* ───────────────────────── VFS data ───────────────────────── */
 
@@ -410,16 +411,9 @@ export default function Terminal() {
 
   /* ─── render ─── */
   return (
-    <section id="terminal" className="py-20">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-3xl font-bold mb-12 flex items-center gap-2"
-        >
-          <span className="text-primary">04.</span> Interactive Terminal
-        </motion.h2>
+    <section id="terminal" className="scroll-mt-24 py-20">
+      <div>
+        <SectionHeading eyebrow="Playground" title="Interactive terminal" sub="Poke around my machine. Type &quot;help&quot; to get started." />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -427,13 +421,13 @@ export default function Terminal() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           onClick={focusInput}
-          className="relative rounded-xl overflow-hidden border border-white/10 cursor-text"
+          className="relative rounded-2xl overflow-hidden border border-white/10 cursor-text"
           style={{
-            boxShadow: "0 0 40px rgba(0,255,157,0.08), 0 0 80px rgba(0,255,157,0.04)",
+            boxShadow: "0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(52,211,153,0.06)",
           }}
         >
           {/* ── Title bar ── */}
-          <div className="flex items-center gap-2 px-4 py-3 bg-[#1a1a2e] border-b border-white/10 select-none">
+          <div className="flex items-center gap-2 px-4 py-3 bg-[#111116] border-b border-white/10 select-none">
             <div className="flex gap-1.5">
               <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
               <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
@@ -447,7 +441,7 @@ export default function Terminal() {
           {/* ── Terminal body ── */}
           <div
             ref={scrollRef}
-            className="relative bg-[#0d1117] p-5 font-mono text-sm leading-relaxed overflow-y-auto"
+            className="relative bg-[#0a0a0d] p-5 font-mono text-sm leading-relaxed overflow-y-auto"
             style={{ height: "420px" }}
           >
             {/* Scanline overlay */}
@@ -508,7 +502,7 @@ export default function Terminal() {
           </div>
 
           {/* ── Bottom hint bar ── */}
-          <div className="flex items-center justify-between px-4 py-2 bg-[#1a1a2e] border-t border-white/10 text-[10px] font-mono text-gray-600 select-none">
+          <div className="flex items-center justify-between px-4 py-2 bg-[#111116] border-t border-white/10 text-[10px] font-mono text-gray-600 select-none">
             <span>↑↓ history &nbsp;·&nbsp; type &quot;help&quot; for commands</span>
             <span className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#28c840] animate-pulse" />

@@ -1,60 +1,45 @@
 "use client";
 import { motion } from "framer-motion";
+import { Bug, Cloud, Code2, Crosshair } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
 
 const skills = [
-  { 
-    category: "Reverse Engineering", 
-    items: ["Ghidra", "x64dbg", "Assembly (ASM)", "ProcMon", "Malware Analysis"] 
-  },
-  { 
-    category: "Offensive Security", 
-    items: ["Burp Suite", "Metasploit", "Nmap", "Wireshark", "Web/Network Pentesting"] 
-  },
-  { 
-    category: "Development", 
-    items: ["Python", "C/C++", "JavaScript", "Flask", "Bash Scripting"] 
-  },
-  { 
-    category: "Cloud & Ops", 
-    items: ["Google Cloud SCC", "Linux Administration", "Git/GitHub", "MySQL", "VS Code"] 
-  },
+  { category: "Reverse Engineering", icon: Bug, items: ["Ghidra", "x64dbg", "Assembly", "ProcMon", "Malware Analysis"] },
+  { category: "Offensive Security", icon: Crosshair, items: ["Burp Suite", "Metasploit", "Nmap", "Wireshark", "Web/Network Pentesting"] },
+  { category: "Development", icon: Code2, items: ["Python", "C/C++", "JavaScript", "Flask", "Bash"] },
+  { category: "Cloud & Ops", icon: Cloud, items: ["Google Cloud SCC", "Linux Admin", "Git/GitHub", "MySQL", "VS Code"] },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-3xl font-bold mb-12 flex items-center gap-2"
-        >
-          <span className="text-primary">02.</span> Technical Arsenal
-        </motion.h2>
+    <section id="skills" className="scroll-mt-24 py-20">
+      <SectionHeading eyebrow="Skills" title="Technical arsenal" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skills.map((group, index) => (
-            <motion.div
-              key={group.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="p-6 rounded-xl bg-white/5 border border-white/5 backdrop-blur-sm hover:border-primary/30 transition-colors"
-            >
-              <h3 className="text-xl font-bold text-accent mb-4 font-mono">{group.category}</h3>
-              <ul className="space-y-2">
-                {group.items.map((skill) => (
-                  <li key={skill} className="flex items-center gap-2 text-gray-400 text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {skills.map(({ category, icon: Icon, items }, i) => (
+          <motion.div
+            key={category}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+            className="card group p-6 hover:border-primary/30 hover:-translate-y-1"
+          >
+            <div className="flex items-center gap-3">
+              <span className="grid place-items-center size-10 rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20">
+                <Icon size={20} />
+              </span>
+              <h3 className="text-lg font-medium">{category}</h3>
+            </div>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {items.map((s) => (
+                <span key={s} className="rounded-lg border border-white/5 bg-white/[0.03] px-3 py-1.5 text-sm text-zinc-300">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

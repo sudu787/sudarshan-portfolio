@@ -1,152 +1,99 @@
 "use client";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Send, CheckCircle, Terminal } from "lucide-react";
+import { Github, Linkedin, Mail, Send, CheckCircle } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
 
+const input =
+  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-primary/60 focus:ring-4 focus:ring-primary/10 transition";
+
+const socials = [
+  { href: "https://github.com/sudu787", label: "GitHub", icon: Github },
+  { href: "https://www.linkedin.com/in/sudarshan787", label: "LinkedIn", icon: Linkedin },
+  { href: "mailto:sudarshanajoysindhu@gmail.com", label: "Email", icon: Mail },
+];
+
 export default function Contact() {
-  // 1. SETUP: Replace the string below with your unique Formspree ID
   const [state, handleSubmit] = useForm("xpqaabbr");
 
-  // 2. SUCCESS STATE: What to show after the user clicks send
-  if (state.succeeded) {
-    return (
-      <section id="contact" className="py-24 relative overflow-hidden flex items-center justify-center">
-        <div className="bg-[#0a0a0a] border border-green-500/30 p-8 rounded-2xl shadow-2xl max-w-lg text-center">
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="flex flex-col items-center gap-4"
-          >
-            <div className="p-4 bg-green-500/10 rounded-full text-green-500">
-                <CheckCircle size={48} />
-            </div>
-            <h3 className="text-2xl font-bold text-white">Transmission Received</h3>
-            <p className="text-gray-400 font-mono text-sm">
-              <span className="text-primary">root@sudarshan:~$</span> echo "Message delivered."
-            </p>
-            <p className="text-gray-500 mt-2">
-              Thanks for reaching out! I will decrypt your message and respond shortly.
-            </p>
-            <button 
-                onClick={() => window.location.reload()} 
-                className="mt-6 px-6 py-2 bg-white/5 border border-white/10 rounded hover:bg-white/10 text-sm transition-colors"
-            >
-                Send Another Packet
-            </button>
-          </motion.div>
-        </div>
-      </section>
-    );
-  }
-
-  // 3. NORMAL STATE: The form itself
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4">
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          
-          {/* Left Side: Text & Socials */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Connect!</span>
+    <section id="contact" className="scroll-mt-24 py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="card relative overflow-hidden p-8 md:p-12"
+      >
+        <div className="pointer-events-none absolute -left-32 -bottom-32 size-96 rounded-full bg-primary/15 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full bg-secondary/15 blur-3xl" />
+
+        <div className="relative grid gap-12 md:grid-cols-2">
+          <div>
+            <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary">
+              <span className="h-px w-6 bg-primary" /> Contact
+            </span>
+            <h2 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">
+              Let&apos;s <span className="text-gradient">work together</span>
             </h2>
-            
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              I'm currently looking for new opportunities in **Red Teaming** and **Malware Analysis**. 
-              Whether you have a question, a challenge, or just want to say hi, my inbox is always open!
+            <p className="mt-6 text-lg text-zinc-400 leading-relaxed">
+              I&apos;m looking for opportunities in Red Teaming and Malware Analysis. Whether you have a question, a
+              challenge, or just want to say hi, my inbox is open.
             </p>
-
-            <div className="flex gap-6 mb-12">
-              <a href="https://github.com/sudu787" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
-                <Github size={24} />
-              </a>
-              <a href="https://www.linkedin.com/in/sudarshan787" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
-                <Linkedin size={24} />
-              </a>
-              <a href="mailto:sudarshanajoysindhu@gmail.com" className="p-3 bg-white/5 rounded-full hover:bg-primary/20 hover:text-primary transition-all">
-                <Mail size={24} />
-              </a>
+            <div className="mt-8 flex gap-3">
+              {socials.map(({ href, label, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="grid place-items-center size-12 rounded-full border border-white/10 bg-white/5 text-zinc-300 hover:text-white hover:border-primary/50 hover:bg-primary/10 transition-colors"
+                >
+                  <Icon size={20} />
+                </a>
+              ))}
             </div>
-            
-            <div className="p-4 bg-white/5 border-l-4 border-primary rounded-r-lg hidden md:block">
-              <p className="text-sm text-gray-300 font-mono flex items-center gap-2">
-                <Terminal size={14} className="text-primary"/>
-                <span className="text-primary">root@sudarshan:~$</span> ./open_channel.sh --secure
-              </p>
-            </div>
-          </motion.div>
+          </div>
 
-          {/* Right Side: Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-[#0a0a0a] border border-white/5 p-8 rounded-2xl shadow-2xl relative"
-          >
-            {/* Form Logic */}
-            <form onSubmit={handleSubmit} className="space-y-6">
+          {state.succeeded ? (
+            <div className="flex flex-col items-center justify-center text-center gap-3 rounded-2xl border border-primary/20 bg-black/30 p-8">
+              <CheckCircle size={40} className="text-primary" />
+              <h3 className="text-xl font-medium">Message sent</h3>
+              <p className="text-zinc-400">Thanks for reaching out. I&apos;ll get back to you soon.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                <input 
-                  id="name"
-                  type="text" 
-                  name="name" // Name attribute is required for Formspree
-                  placeholder="John Doe" 
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                />
+                <label htmlFor="name" className="mb-2 block text-sm text-zinc-400">Name</label>
+                <input id="name" name="name" type="text" placeholder="John Doe" required className={input} />
                 <ValidationError prefix="Name" field="name" errors={state.errors} />
               </div>
-
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                <input 
-                  id="email"
-                  type="email" 
-                  name="email" // required
-                  placeholder="john@example.com" 
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                />
+                <label htmlFor="email" className="mb-2 block text-sm text-zinc-400">Email</label>
+                <input id="email" name="email" type="email" placeholder="john@example.com" required className={input} />
                 <ValidationError prefix="Email" field="email" errors={state.errors} />
               </div>
-
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                <textarea 
-                  id="message"
-                  name="message" // required
-                  rows={4} 
-                  placeholder="Your message..." 
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
-                />
+                <label htmlFor="message" className="mb-2 block text-sm text-zinc-400">Message</label>
+                <textarea id="message" name="message" rows={4} placeholder="Your message..." required className={`${input} resize-none`} />
                 <ValidationError prefix="Message" field="message" errors={state.errors} />
               </div>
-
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={state.submitting}
-                className="w-full bg-gradient-to-r from-primary to-green-600 text-black font-bold py-4 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white py-3.5 font-medium text-black hover:bg-primary transition-colors disabled:opacity-50"
               >
-                {state.submitting ? "Transmitting..." : "Send Message"} 
-                {!state.submitting && <Send size={18} />}
+                {state.submitting ? "Sending..." : <>Send message <Send size={16} /></>}
               </button>
             </form>
-          </motion.div>
+          )}
         </div>
+      </motion.div>
 
-        <div className="mt-24 pt-8 border-t border-white/5 text-center text-sm text-gray-600 font-mono">
-          <p>Build v1.0.0 // Sudarshan Ajoy Sindhu</p>
-        </div>
-      </div>
+      <footer className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-zinc-600">
+        <p>© {new Date().getFullYear()} Sudarshan Ajoy Sindhu</p>
+        <p className="font-mono">Built with Next.js</p>
+      </footer>
     </section>
   );
 }

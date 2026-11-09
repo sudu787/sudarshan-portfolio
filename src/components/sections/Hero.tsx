@@ -1,119 +1,102 @@
 "use client";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, Terminal } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import { useState, useEffect } from "react";
 
-// 👇 Improved Typewriter Component
-const RoleRotator = () => {
-  const roles = ["Red Team Specialist", "Malware Analysis", "Google Cloud Security"];
-  
+const roles = ["Red Team Specialist", "Malware Analyst", "Cloud Security Engineer"];
+
+function RoleRotator() {
   const [text, setText] = useState("");
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [delta, setDelta] = useState(100); // Speed control
+  const [i, setI] = useState(0);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
-
-    return () => clearInterval(ticker);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, delta]);
-
-  const tick = () => {
-    let i = roleIndex % roles.length;
-    let fullText = roles[i];
-    
-    // Determine text based on typing or deleting
-    let updatedText = isDeleting 
-      ? fullText.substring(0, text.length - 1) 
-      : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    // Typing Speed Logic
-    if (isDeleting) {
-      setDelta(40); // Fast delete speed
-    } else {
-      setDelta(80); // Normal typing speed
-    }
-
-    // 1. Finished Typing? -> Wait then delete
-    if (!isDeleting && updatedText === fullText) {
-      setDelta(2000); // 2 seconds pause at the end
-      setIsDeleting(true);
-    } 
-    // 2. Finished Deleting? -> Move to next word
-    else if (isDeleting && updatedText === "") {
-      setIsDeleting(false);
-      setRoleIndex((prev) => prev + 1);
-      setDelta(100); // Reset speed for new word
-    }
-  };
+    const full = roles[i % roles.length];
+    const done = !deleting && text === full;
+    const t = setTimeout(() => {
+      if (done) return setDeleting(true);
+      if (deleting && text === "") {
+        setDeleting(false);
+        setI(i + 1);
+        return;
+      }
+      setText(full.slice(0, text.length + (deleting ? -1 : 1)));
+    }, done ? 1800 : deleting ? 40 : 80);
+    return () => clearTimeout(t);
+  }, [text, deleting, i]);
 
   return (
-    <span className="font-mono text-xl md:text-2xl text-gray-400 min-h-[32px] inline-block">
+    <span className="font-mono text-primary">
       {text}
-      <span className="animate-cursor-blink border-r-2 border-primary ml-1">&nbsp;</span>
+      <span className="animate-cursor-blink ml-0.5 border-r-2 border-primary">&nbsp;</span>
     </span>
   );
-};
+}
+
+const stats = [
+  { value: "5+", label: "Certifications" },
+  { value: "3", label: "Security projects" },
+  { value: "2028", label: "M.Tech, IIITM" },
+];
+
+const fade = (d: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, delay: d, ease: [0.22, 1, 0.36, 1] as const },
+});
 
 export default function Hero() {
   return (
-    <section className="h-screen flex flex-col justify-center items-center relative overflow-hidden px-4">
-      {/* Background decoration */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_var(--color-primary)_0%,_transparent_70%)] opacity-10" />
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center max-w-3xl"
-      >
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <span className="h-px w-8 bg-primary"></span>
-          <span className="text-primary font-mono text-sm tracking-widest uppercase flex items-center gap-2">
-            <Terminal size={14} /> System Online
+    <section className="relative min-h-screen flex items-center px-4 pt-28 pb-16">
+      <div className="mx-auto max-w-5xl w-full">
+        <motion.div {...fade(0)} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" />
+            <span className="relative inline-flex size-2 rounded-full bg-primary" />
           </span>
-          <span className="h-px w-8 bg-primary"></span>
-        </div>
+          Open to Red Team &amp; security internships
+        </motion.div>
 
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
-          Sudarshan <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Ajoy Sindhu</span>
-        </h1>
+        <motion.h1 {...fade(0.1)} className="mt-6 text-5xl sm:text-7xl md:text-8xl font-semibold tracking-tighter leading-[0.95]">
+          Sudarshan
+          <br />
+          <span className="text-gradient">Ajoy Sindhu</span>
+        </motion.h1>
 
-        {/* Animated Text Section */}
-        <div className="h-12 flex justify-center items-center mb-8">
-            <span className="text-primary mr-2 text-xl md:text-2xl">{">"}</span>
-            <RoleRotator />
-        </div>
+        <motion.p {...fade(0.2)} className="mt-6 text-xl md:text-2xl text-zinc-400 h-8">
+          <RoleRotator />
+        </motion.p>
 
-        <p className="text-muted text-lg mb-8 max-w-xl mx-auto">
-          "Breaking systems to build safer ones." <br />
-          Specializing in Web/Network Pentesting, Malware Analysis, and Cloud Security.
-        </p>
+        <motion.p {...fade(0.3)} className="mt-6 max-w-xl text-lg text-zinc-400 leading-relaxed">
+          Breaking systems to build safer ones. I work on web &amp; network pentesting,
+          malware reverse engineering, and cloud security.
+        </motion.p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <motion.div {...fade(0.4)} className="mt-10 flex flex-col sm:flex-row gap-3">
           <a
             href="#projects"
-            className="group relative px-8 py-3 bg-white/5 border border-white/10 text-white rounded-md hover:bg-primary/10 hover:border-primary/50 transition-all duration-300"
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-black hover:bg-zinc-200 transition-colors"
           >
-            <span className="flex items-center gap-2">
-              View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </span>
+            View projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </a>
-          
           <a
             href="/resumeaiml.pdf"
             download="Sudarshan_Sindhu_Resume.pdf"
-            className="px-8 py-3 bg-primary text-black font-semibold rounded-md hover:bg-primary/90 transition-colors flex items-center gap-2 justify-center shadow-[0_0_20px_rgba(0,255,157,0.3)] hover:shadow-[0_0_30px_rgba(0,255,157,0.5)]"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 font-medium hover:bg-white/10 transition-colors"
           >
-             Download Resume <Download size={18} />
+            Download résumé <Download size={18} />
           </a>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        <motion.dl {...fade(0.5)} className="mt-16 grid grid-cols-3 max-w-lg divide-x divide-white/10 border-t border-white/10 pt-6">
+          {stats.map((s) => (
+            <div key={s.label} className="px-4 first:pl-0">
+              <dt className="text-2xl md:text-3xl font-semibold tracking-tight">{s.value}</dt>
+              <dd className="mt-1 text-xs text-zinc-500">{s.label}</dd>
+            </div>
+          ))}
+        </motion.dl>
+      </div>
     </section>
   );
 }

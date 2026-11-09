@@ -1,24 +1,24 @@
 "use client";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Lock } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
+import SectionHeading from "@/components/SectionHeading";
 
 const projects = [
   {
     title: "Phishing Detector Chrome Extension",
-    desc: "Developed a real-time cybersecurity browser extension powered by a custom-trained DistilBERT NLP model (fine-tuned on 1.33M URLs) and an XGBoost heuristic engine. Integrated an autonomous LLM (Llama-3.3 70B via Groq) to act as a virtual SOC Analyst, fusing live domain intelligence and ML signals to accurately detect and explain zero-day phishing attacks in milliseconds via a FastAPI backend.",
-    tags: ["Python", "Flask", "Scikit-Learn", "JavaScript", "Chrome API"],
-    links: { github: "https://github.com/yourusername", live: null },
+    desc: "Real-time browser extension powered by a DistilBERT model fine-tuned on 1.33M URLs plus an XGBoost heuristic engine. A Llama-3.3 70B agent (via Groq) acts as a virtual SOC analyst, fusing live domain intel and ML signals to detect and explain zero-day phishing in milliseconds over a FastAPI backend.",
+    tags: ["DistilBERT", "XGBoost", "FastAPI", "LLM", "Chrome API"],
+    links: { github: null, live: null },
   },
   {
     title: "Pentest Reporter",
-    desc: "A full-stack security reporting platform designed to streamline the workflow of penetration testers, allowing users to create projects, upload scan results, and generate PDF reports. Engineered a secure authentication system featuring both Google OAuth 2.0 and a custom OTP-based email login flow using FastAPI and BackgroundTasks for asynchronous email delivery. Designed a robust database schema with SQLAlchemy and PostgreSQL to manage users, projects, scans, and vulnerabilities, enforcing strict foreign-key relationships. Deployed a containerized microservices architecture using Docker on Render.com, implementing CORS middleware.",
-    tags: ["Python", "Next.js", "FastAPI", "Docker", "PostgreSQL"],
+    desc: "Full-stack reporting platform for penetration testers: create projects, upload scan results, generate PDF reports. Google OAuth 2.0 plus OTP email login, a PostgreSQL schema for users, scans and vulnerabilities, and containerized deployment with Docker.",
+    tags: ["Next.js", "FastAPI", "PostgreSQL", "Docker", "OAuth"],
     links: { github: "https://github.com/sudu787/pentest-reporter-mvp", live: "https://pentest-frontend-production.up.railway.app/" },
   },
-  // Added a placeholder for your future third project
   {
     title: "Home Lab & Network Defense",
-    desc: "Self-hosted intrusion detection and monitoring environment to practice Blue Team operations, log analysis, and network traffic inspection using industry-standard tools.",
+    desc: "Self-hosted intrusion detection and monitoring environment for practicing Blue Team operations, log analysis, and network traffic inspection with industry-standard tools.",
     tags: ["Wireshark", "Snort", "Virtualization", "Bash"],
     links: { github: null, live: null },
   },
@@ -26,62 +26,51 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-3xl font-bold mb-12 flex items-center gap-2"
-        >
-          <span className="text-primary">03.</span> Operations & Projects
-        </motion.h2>
+    <section id="projects" className="scroll-mt-24 py-20">
+      <SectionHeading eyebrow="Work" title="Selected projects" sub="Things I've built while learning how to break, and defend, real systems." />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative bg-[#0f0f0f] border border-gray-800 rounded-lg overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              
-              <div className="p-6 flex-1 flex flex-col">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                    <Lock size={20} />
-                  </div>
-                  <div className="flex gap-3">
-                    {project.links.github && (
-                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                        <Github size={20} />
-                      </a>
-                    )}
-                    {project.links.live && project.links.live !== "#" && (
-                      <a href={project.links.live} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
-                        <ExternalLink size={20} />
-                      </a>
-                    )}
-                  </div>
-                </div>
+      <div className="space-y-4">
+        {projects.map((p, i) => (
+          <motion.article
+            key={p.title}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+            className="card group relative overflow-hidden p-6 md:p-8 hover:border-white/15"
+          >
+            <div className="pointer-events-none absolute -right-24 -top-24 size-64 rounded-full bg-primary/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                <p className="text-gray-400 text-sm mb-6 flex-1 leading-relaxed">{project.desc}</p>
+            <div className="relative grid gap-6 md:grid-cols-[auto_1fr_auto] md:items-start">
+              <span className="font-mono text-sm text-zinc-600">0{i + 1}</span>
 
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="text-xs font-mono px-2 py-1 rounded bg-white/5 text-primary/80 border border-white/5">
-                      {tag}
+              <div>
+                <h3 className="text-2xl font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-3 max-w-2xl text-zinc-400 leading-relaxed">{p.desc}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span key={t} className="rounded-full bg-white/5 px-3 py-1 font-mono text-xs text-zinc-300">
+                      {t}
                     </span>
                   ))}
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
+
+              <div className="flex gap-2">
+                {p.links.github && (
+                  <a href={p.links.github} target="_blank" rel="noopener noreferrer" aria-label={`${p.title} source`} className="grid place-items-center size-10 rounded-full border border-white/10 text-zinc-400 hover:text-white hover:border-white/30 transition-colors">
+                    <Github size={18} />
+                  </a>
+                )}
+                {p.links.live && (
+                  <a href={p.links.live} target="_blank" rel="noopener noreferrer" aria-label={`${p.title} live`} className="grid place-items-center size-10 rounded-full bg-white text-black hover:bg-primary transition-colors">
+                    <ArrowUpRight size={18} />
+                  </a>
+                )}
+              </div>
+            </div>
+          </motion.article>
+        ))}
       </div>
     </section>
   );
