@@ -40,6 +40,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env.local
-
-# design-taste skill working files
-/.taste-skill

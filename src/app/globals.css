@@ -1,11 +1,67 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0f0f0f;
-  --font-sans: var(--font-plex-sans);
-  --font-mono: var(--font-plex-mono);
+  --color-background: #07070a;
+  --color-surface: #0e0e13;
+  --color-primary: #34d399;   /* emerald */
+  --color-secondary: #a78bfa; /* violet */
+  --color-accent: #22d3ee;    /* cyan */
+  --color-muted: #71717a;
+
+  --font-mono: var(--font-jetbrains-mono);
+  --font-sans: var(--font-inter);
+
+  --animate-cursor-blink: blink 1s step-end infinite;
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
 }
 
-body { background: var(--color-background); font-family: var(--font-plex-sans); }
+body {
+  background: var(--color-background);
+  color: #fafafa;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
 
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+/* Fixed backdrop: faded grid + two soft color glows */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(600px circle at 15% 10%, rgb(52 211 153 / 0.12), transparent 60%),
+    radial-gradient(700px circle at 85% 30%, rgb(167 139 250 / 0.10), transparent 60%),
+    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px) 0 0 / 56px 56px;
+  mask-image: radial-gradient(ellipse at top, black 30%, transparent 80%);
+}
+
+/* Glass card used across sections */
+@utility card {
+  border-radius: 1.25rem;
+  border: 1px solid rgb(255 255 255 / 0.07);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.04), rgb(255 255 255 / 0.015));
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+@utility text-gradient {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-background); }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

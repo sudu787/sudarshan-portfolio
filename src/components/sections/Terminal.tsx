@@ -1,5 +1,7 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import SectionHeading from "@/components/SectionHeading";
 
 /* ───────────────────────── VFS data ───────────────────────── */
 
@@ -66,53 +68,26 @@ const VFS: Record<string, { type: "dir" | "file"; content?: string[] }> = {
       "Please run \x1b[36mresume\x1b[0m command to download the file directly.",
     ] 
   },
-  "~/projects/rustscan-rs.txt": {
-    type: "file",
+  "~/projects/phishing_detector.txt": { 
+    type: "file", 
     content: [
-      "[32mrustscan-rs[0m",
-      "Async TCP and UDP port scanner in Rust: banners, TLS certificates, JSON, CSV and HTML reports.",
-      "[36mhttps://github.com/sudu787/portscanner[0m",
-    ]
+      "\x1b[32mPhishing Detector Chrome Extension\x1b[0m",
+      "Real-time cybersecurity browser extension powered by DistilBERT NLP + XGBoost + LLM SOC Analyst via FastAPI",
+    ] 
   },
-  "~/projects/secureflow-ai.txt": {
-    type: "file",
+  "~/projects/pentest_reporter.txt": { 
+    type: "file", 
     content: [
-      "[32msecureflow-ai[0m",
-      "Five AI agents (triage, investigation, threat intel, memory, response) share one knowledge graph. FlowZint 2026.",
-      "[36mhttps://github.com/sudu787/secureflow-ai[0m",
-    ]
+      "\x1b[32mPentest Reporter\x1b[0m",
+      "Full-stack security reporting platform with FastAPI, Next.js, Docker, PostgreSQL, and Google OAuth 2.0 / OTP login.",
+    ] 
   },
-  "~/projects/phishguard-pro.txt": {
-    type: "file",
+  "~/projects/home_lab.txt": { 
+    type: "file", 
     content: [
-      "[32mphishguard-pro[0m",
-      "Chrome extension + FastAPI: XGBoost on the URL, then a random forest on 58 URL and page features.",
-      "[36mhttps://github.com/sudu787/phishguard-pro[0m",
-    ]
-  },
-  "~/projects/postquantum.txt": {
-    type: "file",
-    content: [
-      "[32mpostquantum[0m",
-      "TLS-style handshake on CNSA 2.0: ML-KEM-1024, ML-DSA-87, HKDF-SHA384, AES-256-GCM.",
-      "[36mhttps://github.com/sudu787/postquantum[0m",
-    ]
-  },
-  "~/projects/bluefuzz.txt": {
-    type: "file",
-    content: [
-      "[32mbluefuzz[0m",
-      "Fuzzes the Linux Bluetooth stack (BlueZ) through /dev/vhci, no radio hardware needed.",
-      "[36mhttps://github.com/sudu787/zeroday_zeroradio[0m",
-    ]
-  },
-  "~/projects/lwe_study.txt": {
-    type: "file",
-    content: [
-      "[32mlwe_study[0m",
-      "Shows retries on re-randomised lattice bases are not independent (toy LWE).",
-      "[36mhttps://github.com/sudu787/crypto_project[0m",
-    ]
+      "\x1b[32mHome Lab & Network Defense\x1b[0m",
+      "Self-hosted IDS/monitoring environment for Blue Team operations and log analysis",
+    ] 
   },
 };
 
@@ -146,11 +121,11 @@ type OutputLine = { type: "input" | "output" | "error" | "system"; text: string 
 
 function parseAnsi(raw: string): React.ReactNode[] {
   const COLOR_MAP: Record<string, string> = {
-    "36": "#ffffff",   // cyan / accent
-    "32": "#dafa9c",   // green / primary
+    "36": "#00f0ff",   // cyan / accent
+    "32": "#00ff9d",   // green / primary
     "31": "#ff5555",   // red
     "33": "#f1fa8c",   // yellow
-    "35": "#8f8f8f",   // purple / secondary
+    "35": "#bd00ff",   // purple / secondary
     "0": "",
   };
 
@@ -436,9 +411,20 @@ export default function Terminal() {
 
   /* ─── render ─── */
   return (
-    <div
+    <section id="terminal" className="scroll-mt-24 py-20">
+      <div>
+        <SectionHeading eyebrow="Playground" title="Interactive terminal" sub="Poke around my machine. Type &quot;help&quot; to get started." />
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           onClick={focusInput}
-          className="relative flex h-screen flex-col overflow-hidden cursor-text"
+          className="relative rounded-2xl overflow-hidden border border-white/10 cursor-text"
+          style={{
+            boxShadow: "0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(52,211,153,0.06)",
+          }}
         >
           {/* ── Title bar ── */}
           <div className="flex items-center gap-2 px-4 py-3 bg-[#111116] border-b border-white/10 select-none">
@@ -456,14 +442,14 @@ export default function Terminal() {
           <div
             ref={scrollRef}
             className="relative bg-[#0a0a0d] p-5 font-mono text-sm leading-relaxed overflow-y-auto"
-            style={{ flex: 1 }}
+            style={{ height: "420px" }}
           >
             {/* Scanline overlay */}
             <div
               className="pointer-events-none absolute inset-0 z-10"
               style={{
                 background:
-                  "repeating-linear-gradient(0deg, rgba(218,250,156,0.015) 0px, rgba(218,250,156,0.015) 1px, transparent 1px, transparent 3px)",
+                  "repeating-linear-gradient(0deg, rgba(0,255,157,0.015) 0px, rgba(0,255,157,0.015) 1px, transparent 1px, transparent 3px)",
               }}
             />
 
@@ -473,9 +459,9 @@ export default function Terminal() {
                 <div key={i} className="min-h-[1.375rem]">
                   {line.type === "input" ? (
                     <span>
-                      <span className="text-[#dafa9c]">sudarshan@kali</span>
+                      <span className="text-[#00ff9d]">sudarshan@kali</span>
                       <span className="text-gray-500">:</span>
-                      <span className="text-[#ffffff]">{(line as any).cwd || cwd}</span>
+                      <span className="text-[#00f0ff]">{(line as any).cwd || cwd}</span>
                       <span className="text-gray-500">$ </span>
                       <span className="text-gray-300">{line.text}</span>
                     </span>
@@ -490,13 +476,13 @@ export default function Terminal() {
               {/* Active input line */}
               {!isBooting && (
                 <div className="flex items-center min-h-[1.375rem]">
-                  <span className="text-[#dafa9c]">sudarshan@kali</span>
+                  <span className="text-[#00ff9d]">sudarshan@kali</span>
                   <span className="text-gray-500">:</span>
-                  <span className="text-[#ffffff]">{cwd}</span>
+                  <span className="text-[#00f0ff]">{cwd}</span>
                   <span className="text-gray-500">$ </span>
                   <span className="text-gray-300">{input}</span>
                   <span
-                    className="inline-block w-[8px] h-[18px] bg-[#dafa9c] ml-px"
+                    className="inline-block w-[8px] h-[18px] bg-[#00ff9d] ml-px"
                     style={{ animation: "blink 1s step-end infinite" }}
                   />
                   <input
@@ -523,6 +509,8 @@ export default function Terminal() {
               connected
             </span>
           </div>
-        </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }
